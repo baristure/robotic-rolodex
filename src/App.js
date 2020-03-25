@@ -8,28 +8,35 @@ class App extends Component {
     super()
 
     this.state = {
-      heroes: [],
+      robots: [],
       searchField: ''
     };
+
+    this.handleChange=this.handleChange.bind(this);
   }
   componentDidMount() {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
-      .then(users => this.setState({ heroes: users }));
+      .then(users => this.setState({ robots: users }));
+  }
+
+  handleChange = e => {
+    this.setState({ searchField: e.target.value })
   }
 
   render() {
-    const { heroes, searchField } = this.state;
-    const filteredHeroes = heroes.filter(heroes =>
-      heroes.name.toLowerCase().includes(searchField.toLowerCase())
-    )
+    const { robots, searchField } = this.state;
+    const filteredRobots = robots.filter(robots =>
+      robots.name.toLowerCase().includes(searchField.toLowerCase())
+    ) 
     return (
       <div className="App">
+        <h1> Robotic Rolodex </h1>
         <SearchBox
-        placeholder='Search Heroes' 
-        handleChange={e=>this.setState({searchField : e.target.value})}
+          placeholder='Search Robots'
+          handleChange={this.handleChange}
         />
-        <CardList heroes={filteredHeroes} />
+        <CardList robots={filteredRobots} />
       </div>
     );
   }

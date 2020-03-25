@@ -4,9 +4,9 @@ import './card-list.styles.css'
 
 export const CardList = props => (
     <div className="card-list">
-        {props.heroes.map(heroes =>
+        {props.robots.map(robots =>
             (
-                <Card key={heroes.id} heroes={heroes} />
+                <Card key={robots.id} robots={robots} />
             ))}
     </div>
 )
